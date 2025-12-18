@@ -9,6 +9,14 @@ import {
   deleteDoc 
 } from "firebase/firestore";
 
+
+// This file acts as our Backend API. It handles HTTP requests (GET, POST, PUT, DELETE)
+// coming from the client-side.
+
+// READ OPERATION (GET)
+// when the frontend requests data, this function retrieves all documents 
+// from the 'inventory' collection in Firestore.
+
 export async function GET() {
   try {
     const querySnapshot = await getDocs(collection(db, "inventory"));
@@ -22,6 +30,10 @@ export async function GET() {
   }
 }
 
+
+// CREATE OPERATION (POST)
+// this function handles adding new items. It receives data from the body
+// of the request and uses 'addDoc' to save it to the cloud.
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -35,6 +47,8 @@ export async function POST(req: Request) {
   }
 }
 
+// UPDATE OPERATION (PUT)
+// this function updates an existing item. 
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
@@ -48,6 +62,9 @@ export async function PUT(req: Request) {
   }
 }
 
+// 4. DELETE OPERATION (DELETE)
+// this funvction removes an item permanently. It finds the document reference
+// by ID and executes the 'deleteDoc' command.
 export async function DELETE(req: Request) {
   try {
     const body = await req.json();
